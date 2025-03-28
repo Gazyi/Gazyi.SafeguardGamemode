@@ -4,8 +4,13 @@ global function SafeguardCallback_MapInit
 
 void function SafeguardCallback_MapInit()
 {
-	if ( IsLobby() || GameRules_GetGameMode() != GAMEMODE_SAFEGUARD ) // Don't wanna this to trigger on menus nor outside payload mode itself
+	if ( IsLobby() || GameRules_GetGameMode() != GAMEMODE_SAFEGUARD )
 		return
+	
+	array< entity > entitiesToDestroy = GetEntArrayByClass_Expensive( "info_spawnpoint_dropship_start" )
+	
+	foreach ( entity ent in entitiesToDestroy )
+		ent.Destroy()
 	
 	switch ( GetMapName() )
 	{
@@ -52,11 +57,6 @@ void function SafeguardCallback_MapInit()
 
 void function ExecAngelCitySafeguard()
 {
-	array< entity > entitiesToDestroy = GetEntArrayByClass_Expensive( "info_spawnpoint_dropship_start" )
-	
-	foreach ( entity ent in entitiesToDestroy )
-		ent.Destroy()
-	
 	AddSafeguardCustomShipStart( < -3993, 4948, 1024 >, < 0, 0, 0 >, TEAM_MILITIA )
 	AddSafeguardCustomShipStart( < -4120, 4260, 1024 >, < 0, 0, 0 >, TEAM_MILITIA )
 	AddSafeguardCustomShipStart( < 2676, -3600, 1024 >, < 0, 180, 0 >, TEAM_IMC )
@@ -78,11 +78,6 @@ void function ExecAngelCitySafeguard()
 
 void function ExecBoomTownSafeguard()
 {
-	array< entity > entitiesToDestroy = GetEntArrayByClass_Expensive( "info_spawnpoint_dropship_start" )
-	
-	foreach ( entity ent in entitiesToDestroy )
-		ent.Destroy()
-
 	AddSafeguardCustomShipStart( <1820, -3663, 2712>, < 0, -65, 0 >, TEAM_MILITIA )
 	AddSafeguardCustomShipStart( <1884, -6452, 2712>, < 0, 45, 0 >, TEAM_MILITIA )
 	AddSafeguardCustomShipStart( <10794, -4089, 2712>, < 0, 145, 0 >, TEAM_IMC )
@@ -107,11 +102,6 @@ void function ExecBoomTownSafeguard()
 
 void function ExecComplexSafeguard()
 {
-	array< entity > entitiesToDestroy = GetEntArrayByClass_Expensive( "info_spawnpoint_dropship_start" )
-	
-	foreach ( entity ent in entitiesToDestroy )
-		ent.Destroy()
-
 	AddSafeguardCustomShipStart( < -1956, 743, 1824 >, < 0, -45, 0 >, TEAM_MILITIA )
 	AddSafeguardCustomShipStart( < -699, 940, 1824 >, < 0, -90, 0 >, TEAM_MILITIA )
 	AddSafeguardCustomShipStart( < -9337, -4932, 1824 >, < 0, 110, 0 >, TEAM_IMC )
@@ -138,11 +128,6 @@ void function ExecComplexSafeguard()
 
 void function ExecBlackWaterCanalSafeguard()
 {
-	array< entity > entitiesToDestroy = GetEntArrayByClass_Expensive( "info_spawnpoint_dropship_start" )
-	
-	foreach ( entity ent in entitiesToDestroy )
-		ent.Destroy()
-
 	AddSafeguardCustomShipStart( < 0, -4125, 512 >, < 0, -25, 0 >, TEAM_MILITIA )
 	AddSafeguardCustomShipStart( < 330, -3800, 512 >, < 0, -35, 0 >, TEAM_MILITIA )
 	AddSafeguardCustomShipStart( < -1880, 3060, 512 >, < 0, 50, 0 >, TEAM_IMC )
@@ -172,11 +157,6 @@ void function ExecBlackWaterCanalSafeguard()
 
 void function ExecGlitchSafeguard()
 {
-	array< entity > entitiesToDestroy = GetEntArrayByClass_Expensive( "info_spawnpoint_dropship_start" )
-	
-	foreach ( entity ent in entitiesToDestroy )
-		ent.Destroy()
-
 	AddSafeguardCustomShipStart( < -4456, -766, 512 >, < 0, 0, 0 >, TEAM_MILITIA )
 	AddSafeguardCustomShipStart( < -4456, -1456, 412 >, < 0, 0, 0 >, TEAM_MILITIA )
 	AddSafeguardCustomShipStart( < 4103, 1054, 512 >, < 0, -180, 0 >, TEAM_IMC )
@@ -201,11 +181,6 @@ void function ExecGlitchSafeguard()
 
 void function ExecDryDockSafeguard()
 {
-	array< entity > entitiesToDestroy = GetEntArrayByClass_Expensive( "info_spawnpoint_dropship_start" )
-	
-	foreach ( entity ent in entitiesToDestroy )
-		ent.Destroy()
-
 	AddSafeguardCustomShipStart( < 1220, 5318, 624 >, < 0, -90, 0 >, TEAM_MILITIA )
 	AddSafeguardCustomShipStart( < 439, 6290, 624 >, < 0, -90, 0 >, TEAM_MILITIA )
 	AddSafeguardCustomShipStart( < 1775, -3428, 624 >, < 0, 180, 0 >, TEAM_IMC )

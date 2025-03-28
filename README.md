@@ -19,6 +19,6 @@ If teams are tied after 2 rounds, game goes to overtime - team with best escort 
 ```
 
 ## Known issues
-Current version of Northstar (1.30) has problems in round based gamemodes with score calculation and player animations in dropship intro only play in first round and after switching sides. As temporary solution, you can use `gamemode_fd_experimental` [**branch of Zanieon's NorthstarMods repository**](https://github.com/Zanieon/NorthstarMods/tree/gamemode_fd_experimental) or [**my small server mod**](https://github.com/Gazyi/NorthstarCustom.CustomServers) that have fixes for that ( a bunch of vanilla NorthstarCustomServers scripts modified with Zanieon's code ).
+Current version of Northstar (1.30) has problems in round based gamemodes with score calculation and player animations in dropship intro only play in first round and after switching sides. As temporary solution, hosts can use `gamemode_fd_experimental` [**branch of Zanieon's NorthstarMods repository**](https://github.com/Zanieon/NorthstarMods/tree/gamemode_fd_experimental) or [**my small server-side mod**](https://github.com/Gazyi/NorthstarCustom.CustomServers) that have fixes for that ( a bunch of vanilla NorthstarCustomServers scripts modified with Zanieon's code ).
 
-Credits to [**Zanieon**](https://github.com/Zanieon) for [**PayloadGamemode**](https://github.com/PayloadGamemode) and other code snippets from `NorthstarMods` repository.
+*Credits to [**Zanieon**](https://github.com/Zanieon) for [**PayloadGamemode**](https://github.com/PayloadGamemode) and other code snippets from `NorthstarMods` repository.*

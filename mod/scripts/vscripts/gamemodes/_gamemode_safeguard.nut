@@ -261,6 +261,8 @@ void function AddSafeguardBatterySpawner( vector origin, vector angles )
 // ========================== GAMESTATE CALLBACKS ========================== //
 void function SafeguardOnEntitiesDidLoad()
 {
+	SafeguardCallback_MapInit()
+	
 	foreach ( callback in file.safeguardCallbacks )
 		callback()
 

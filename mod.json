@@ -32,11 +32,7 @@
 		},
 		{
 			"Path": "mp/levels/safeguard_maps.nut",
-			"RunOn": "SERVER && MP",
-			"ServerCallback": 
-			{
-				"Before": "SafeguardCallback_MapInit"
-			}
+			"RunOn": "SERVER && MP"
 		}
 	],
 	"Localisation": 
