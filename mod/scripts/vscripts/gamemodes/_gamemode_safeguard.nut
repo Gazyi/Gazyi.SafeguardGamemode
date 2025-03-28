@@ -100,7 +100,7 @@ struct
 
 void function GamemodeSafeguard_Init()
 {
-    // Precache
+	// Precache
 	PrecacheModel( CTF_FLAG_BASE_MODEL )
 	PrecacheParticleSystem( BATTERY_FX_FRIENDLY )
 	// Gamemode parameters

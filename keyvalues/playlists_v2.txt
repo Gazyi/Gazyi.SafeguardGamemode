@@ -1,28 +1,28 @@
 playlists
 {
-    Gamemodes
-    {
-        safeguard
-        {
-            inherit defaults
-            vars
-            {
-                name #PL_safeguard
-                lobbytitle #PL_safeguard_lobby
-                description #PL_safeguard_desc
+	Gamemodes
+	{
+		safeguard
+		{
+			inherit defaults
+			vars
+			{
+				name #PL_safeguard
+				lobbytitle #PL_safeguard_lobby
+				description #PL_safeguard_desc
 				abbreviation #PL_safeguard_abbr
-                image fd
-                max_teams 2
-                max_players 16
+				image fd
+				max_teams 2
+				max_players 16
 				roundscorelimit 2
 				scorelimit 2 // 1 for each round
 				timelimit 10 // 5 for each round
-                spawn_zone_enabled 0
-                riff_allow_npcs 0 // No NPC
-                riff_titan_availability 3 // No player Titans
-                riff_titan_exit_enabled 2 // No exit
-                riff_team_share_earn_meter 1
-                riff_team_share_earn_meter_scale 0.35
+				spawn_zone_enabled 0
+				riff_allow_npcs 0 // No NPC
+				riff_titan_availability 3 // No player Titans
+				riff_titan_exit_enabled 2 // No exit
+				riff_team_share_earn_meter 1
+				riff_team_share_earn_meter_scale 0.35
 				classic_rodeo 1 // Force classic Rodeo
 				rodeo_battery_disable_pulls_from_titans 1 // Don't pull batteries from Titan
 				// Safeguard ConVars
@@ -33,13 +33,13 @@ playlists
 				safeguard_battery_respawn_delay 30.0
 				safeguard_stopwatch 0
 
-                //gamemode_score_hint #GAMEMODE_SCORE_HINT_SAFEGUARD
+				//gamemode_score_hint #GAMEMODE_SCORE_HINT_SAFEGUARD
 				gamemode_bullet_001 #GAMEMODE_BULLET_SAFEGUARD_001
 				gamemode_bullet_002 #GAMEMODE_BULLET_SAFEGUARD_002
 				gamemode_bullet_003 #GAMEMODE_BULLET_SAFEGUARD_003
 				gamemode_bullet_004 #GAMEMODE_BULLET_SAFEGUARD_004
 				gamemode_bullet_005 #GAMEMODE_BULLET_SAFEGUARD_005
-            }
+			}
 			maps
 			{
 				mp_angel_city 1
@@ -49,11 +49,11 @@ playlists
 				mp_glitch 1
 				mp_grave 1
 			}
-        }
-    }
-    Playlists
+		}
+	}
+	Playlists
 	{
-        safeguard
+		safeguard
 		{
 			inherit defaults
 			vars
@@ -84,9 +84,9 @@ playlists
 				}
 			}
 		}
-        private_match
-        {
-            // Don't put them in gamemodes or some maps won't be available.
+		private_match
+		{
+			// Don't put them in gamemodes or some maps won't be available.
 			safeguard
 			{
 				maps
@@ -99,6 +99,6 @@ playlists
 					mp_grave 1
 				}
 			}
-        }
-    }
+		}
+	}
 }

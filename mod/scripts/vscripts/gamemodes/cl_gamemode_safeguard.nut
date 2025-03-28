@@ -17,7 +17,7 @@ struct
 
 void function ClGamemodeSafeguard_Init()
 {
-    RegisterLevelMusicForTeam( eMusicPieceID.LEVEL_INTRO, "music_mp_fd_intro_hard", TEAM_IMC ) // music_mp_fd_intro_hard - music_mp_fd_intro_02
+	RegisterLevelMusicForTeam( eMusicPieceID.LEVEL_INTRO, "music_mp_fd_intro_hard", TEAM_IMC ) // music_mp_fd_intro_hard - music_mp_fd_intro_02
 	RegisterLevelMusicForTeam( eMusicPieceID.LEVEL_INTRO, "music_mp_coliseum_intro", TEAM_MILITIA )
 
 	RegisterLevelMusicForTeam( eMusicPieceID.ROUND_BASED_GAME_WON, "music_mp_freeagents_outro_win", TEAM_IMC ) // music_mp_freeagents_outro_win - music_mp_win_sting03
@@ -47,7 +47,7 @@ void function ClGamemodeSafeguard_Init()
 	AddCallback_OnClientScriptInit( ClGamemodeSafeguard_OnClientScriptInit )
 	AddCallback_OnPlayerLifeStateChanged( ClGamemodeSafeguard_OnPlayerLifeStateChanged )
 
-    // Score events strings
+	// Score events strings
 	ScoreEvent_SetSplashText( GetScoreEvent( "HardpointAssault" ), "#SCORE_EVENT_KILLED_DEFENDER" )
 	ScoreEvent_SetMedalText( GetScoreEvent( "HardpointAssault" ), "#SCORE_EVENT_KILLED_DEFENDER" )
 	ScoreEvent_SetSplashText( GetScoreEvent( "HardpointDefense" ), "#SCORE_EVENT_KILLED_ATTACKER" )
@@ -60,7 +60,7 @@ void function ClGamemodeSafeguard_Init()
 	ScoreEvent_SetMedalText( GetScoreEvent( "FDShieldHarvester" ), "#SCORE_EVENT_TITAN_REPAIRED" )
 	ScoreEvent_SetSplashText( GetScoreEvent( "PilotBatteryStolen" ), "#SCORE_EVENT_BATTERY_DESTROYED" )
 	ScoreEvent_SetMedalText( GetScoreEvent( "PilotBatteryStolen" ), "#SCORE_EVENT_BATTERY_DESTROYED" )
-    ScoreEvent_SetSplashText( GetScoreEvent( "MarkedEscort" ), "#SCORE_EVENT_TITAN_ESCORT" )
+	ScoreEvent_SetSplashText( GetScoreEvent( "MarkedEscort" ), "#SCORE_EVENT_TITAN_ESCORT" )
 	ScoreEvent_SetMedalText( GetScoreEvent( "MarkedEscort" ), "#SCORE_EVENT_TITAN_ESCORT" )
 
 	AddCreateCallback( "npc_titan", OnNukeTitanSpawn )
