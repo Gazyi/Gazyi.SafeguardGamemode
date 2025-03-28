@@ -1,0 +1,88 @@
+global function Sh_GamemodeSafeguard_Init
+global const string GAMEMODE_SAFEGUARD = "safeguard"
+// Gamemode settings, changable through playlist vars
+// Titan ConVars
+global const int SAFEGUARD_TITAN_MAX_SHIELD = 2500
+global const float SAFEGUARD_TITAN_AUTOREPAIR_TIME = 15.0
+// Battery ConVars
+global const int SAFEGUARD_BATTERY_SPAWNERS = 1
+global const float SAFEGUARD_BATTERY_SPAWN_DELAY = 60.0
+global const float SAFEGUARD_BATTERY_RESPAWN_DELAY = 30.0
+// Gamemode ConVars
+global const int SAFEGUARD_STOPWATCH = 0
+// Titan states
+global const int SAFEGUARD_TITAN_STATE_STAND = 0
+global const int SAFEGUARD_TITAN_STATE_MOVING = 1
+global const int SAFEGUARD_TITAN_STATE_RODEOED = 2
+global const int SAFEGUARD_TITAN_STATE_DOOMED = 3
+
+void function Sh_GamemodeSafeguard_Init()
+{
+    AddCallback_OnCustomGamemodesInit( CreateGamemodeSafeguard )
+    AddCallback_OnRegisteringCustomNetworkVars( SafeguardRegisterNetworkVars )
+}
+
+void function CreateGamemodeSafeguard()
+{
+    GameMode_Create( GAMEMODE_SAFEGUARD )
+	GameMode_SetName( GAMEMODE_SAFEGUARD, "#GAMEMODE_SAFEGUARD" )
+	GameMode_SetDesc( GAMEMODE_SAFEGUARD, "#PL_safeguard_desc" )
+    GameMode_SetDefendDesc( GAMEMODE_SAFEGUARD, "#GAMEMODE_SAFEGUARD_DEF_DESC" )
+    GameMode_SetAttackDesc( GAMEMODE_SAFEGUARD, "#GAMEMODE_SAFEGUARD_ATT_DESC" )
+    GameMode_SetGameModeAnnouncement( GAMEMODE_SAFEGUARD, "gnrc_modeDesc" )
+    GameMode_SetDefaultScoreLimits( GAMEMODE_SAFEGUARD, 0, 2 )
+    GameMode_SetDefaultTimeLimits( GAMEMODE_SAFEGUARD, 0, 5.0 )
+    GameMode_SetColor( GAMEMODE_SAFEGUARD, [64, 192, 255, 255] )
+
+    // Max amount of scoreboard columns - 4
+    GameMode_AddScoreboardColumnData( GAMEMODE_SAFEGUARD, "#SCOREBOARD_SCORE", PGS_SCORE, 4 )
+    GameMode_AddScoreboardColumnData( GAMEMODE_SAFEGUARD, "#SCOREBOARD_ESCORT_DISTANCE", PGS_DISTANCE_SCORE, 3 )
+    GameMode_AddScoreboardColumnData( GAMEMODE_SAFEGUARD, "#SCOREBOARD_DOOMED", PGS_DEFENSE_SCORE, 2 )
+    GameMode_AddScoreboardColumnData( GAMEMODE_SAFEGUARD, "#SCOREBOARD_PILOT_KILLS", PGS_PILOT_KILLS, 2 )
+    //GameMode_AddScoreboardColumnData( GAMEMODE_SAFEGUARD, "#SCOREBOARD_DEATHS", PGS_DEATHS, 2 )
+
+    AddPrivateMatchMode( GAMEMODE_SAFEGUARD )
+    // Titan ConVars
+    AddPrivateMatchModeSettingArbitrary( "#PL_safeguard", "safeguard_titan_maxshield", SAFEGUARD_TITAN_MAX_SHIELD.tostring() )
+    AddPrivateMatchModeSettingArbitrary( "#PL_safeguard", "safeguard_titan_autorepair_time", SAFEGUARD_TITAN_AUTOREPAIR_TIME.tostring() )
+    // Battery ConVars
+    AddPrivateMatchModeSettingEnum( "#PL_safeguard", "safeguard_battery_spawners", [ "#SETTING_DISABLED", "#SETTING_ENABLED" ], SAFEGUARD_BATTERY_SPAWNERS.tostring() )
+    AddPrivateMatchModeSettingArbitrary( "#PL_safeguard", "safeguard_battery_spawn_delay", SAFEGUARD_BATTERY_SPAWN_DELAY.tostring() )
+    AddPrivateMatchModeSettingArbitrary( "#PL_safeguard", "safeguard_battery_respawn_delay", SAFEGUARD_BATTERY_RESPAWN_DELAY.tostring() )
+    // Gamemode ConVars
+    AddPrivateMatchModeSettingEnum( "#PL_safeguard", "safeguard_stopwatch", [ "#SETTING_DISABLED", "#SETTING_ENABLED" ], SAFEGUARD_STOPWATCH.tostring() )
+
+    #if SERVER
+		GameMode_AddServerInit( GAMEMODE_SAFEGUARD, GamemodeSafeguard_Init )
+		GameMode_SetPilotSpawnpointsRatingFunc( GAMEMODE_SAFEGUARD, RateSpawnpoints_Safeguard )
+		GameMode_SetTitanSpawnpointsRatingFunc( GAMEMODE_SAFEGUARD, RateSpawnpoints_Safeguard )
+	#elseif CLIENT
+		GameMode_AddClientInit( GAMEMODE_SAFEGUARD, ClGamemodeSafeguard_Init )
+	#endif
+	#if !UI
+		GameMode_SetScoreCompareFunc( GAMEMODE_SAFEGUARD, CompareScore )
+	#endif
+}
+
+void function SafeguardRegisterNetworkVars()
+{
+    if ( GAMETYPE != GAMEMODE_SAFEGUARD )
+        return
+
+    // Maybe some of them are not needed...
+    RegisterNetworkedVariable( "attackerTeam", SNDC_GLOBAL, SNVT_INT )
+	RegisterNetworkedVariable( "defenderTeam", SNDC_GLOBAL, SNVT_INT )
+
+    RegisterNetworkedVariable( "militiaHarvester", SNDC_GLOBAL, SNVT_ENTITY )
+
+	RegisterNetworkedVariable( "nukeTitanSoul", SNDC_GLOBAL, SNVT_ENTITY )
+    RegisterNetworkedVariable( "showOverheadIcon", SNDC_TITAN_SOUL, SNVT_BOOL, false )
+    RegisterNetworkedVariable( "nukeTitanState", SNDC_GLOBAL, SNVT_INT )
+
+    Remote_RegisterFunction( "ServerCallback_SafeguardOvertimeAnnouncement" )
+    Remote_RegisterFunction( "ServerCallback_SafeguardBatterySpawnersEnabled" )
+
+    #if CLIENT
+        ClSafeguard_RegisterNetworkFunctions()
+    #endif
+}

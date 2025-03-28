@@ -1,0 +1,2 @@
+# Highlight `.gnut` like `.nut` files
+*.gnut linguist-language=Squirrel
